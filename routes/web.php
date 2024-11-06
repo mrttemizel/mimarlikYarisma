@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\auth\AuthController;
 use App\Http\Controllers\backend\form\FormController;
 use App\Http\Controllers\backend\student\StudentController;
 use App\Http\Controllers\backend\user\UserController;
+use App\Http\Controllers\frontend\page\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/',[PageController::class,'index'])->name('frontend.index');
+Route::get('/aim',[PageController::class,'aim'])->name('frontend.aim');
+Route::get('/project-site',[PageController::class,'projectSite'])->name('frontend.projectSite');
+Route::get('/schedule',[PageController::class,'schedule'])->name('frontend.schedule');
+Route::get('/brief',[PageController::class,'brief'])->name('frontend.brief');
+Route::get('/earth-view',[PageController::class,'earthView'])->name('frontend.earthView');
+Route::get('/drone-videos',[PageController::class,'droneVideos'])->name('frontend.droneVideos');
+Route::get('/autocad-files',[PageController::class,'autocadFiles'])->name('frontend.autocadFiles');
+Route::get('/q&a',[PageController::class,'qA'])->name('frontend.qA');
+Route::get('/jury',[PageController::class,'jury'])->name('frontend.jury');
+Route::get('/prizes',[PageController::class,'prizes'])->name('frontend.prizes');
+Route::get('/register',[PageController::class,'register'])->name('frontend.register');
+Route::get('/upload-project',[PageController::class,'uploadProject'])->name('frontend.uploadProject');
+Route::get('/contact',[PageController::class,'contact'])->name('frontend.contact');
 
 
-Route::get('/',[AuthController::class,'login'])->name('auth.login');
+
+Route::get('/login',[AuthController::class,'login'])->name('auth.login');
 Route::post('/login-submit',[AuthController::class,'login_submit'])->name('auth.login-submit');
 Route::get('/reset-password',[AuthController::class,'reset_password_page'])->name('auth.reset_password');
 Route::post('/reset-password-link',[AuthController::class,'reset_password_link'])->name('auth.reset-password-link');
