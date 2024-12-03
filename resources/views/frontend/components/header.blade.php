@@ -37,9 +37,7 @@
                         <li><a href="{{route('frontend.brief')}}">Brief</a></li>
                         <li><a href="#" onclick="return false;">Documents</a>
                             <ul>
-                                <li><a href="{{route('frontend.earthView')}}">Earth View</a></li>
-                                <li><a href="{{route('frontend.droneVideos')}}">Drone Videos</a></li>
-                                <li><a href="{{route('frontend.autocadFiles')}}">Autocad Files</a></li>
+                                <li><a href="{{route('frontend.document')}}">Competition Documents</a></li>
                                 <li><a href="{{route('frontend.qA')}}">Q&A</a></li>
                             </ul>
                         </li>

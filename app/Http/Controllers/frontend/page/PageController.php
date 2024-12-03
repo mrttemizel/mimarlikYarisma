@@ -32,20 +32,11 @@ class PageController extends Controller
         return view('frontend.page.brief');
     }
 
-    public function earthView()
+    public function document()
     {
-        return view('frontend.page.earth-view');
+        return view('frontend.page.document');
     }
 
-    public function droneVideos()
-    {
-        return view('frontend.page.drone-videos');
-    }
-
-    public function autocadFiles()
-    {
-        return view('frontend.page.autocad-files');
-    }
 
     public function qA()
     {

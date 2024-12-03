@@ -55,7 +55,7 @@
                         <div class="widget-inner">
                             <p>Address: Çıplaklı Mah. Akdeniz Bulvarı No:290 A Döşemealtı/Antalya</p>
                             <p>Phone: +(242) 245 00 00</p>
-                            <p>Email: info@antalya.edu.tr</p>
+                            <p>Email: rtc@antalya.edu.tr</p>
                         </div>
                     </div>
                 </div>

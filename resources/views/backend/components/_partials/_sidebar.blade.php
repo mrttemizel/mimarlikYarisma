@@ -52,7 +52,11 @@
                 </li> <!-- end Dashboard Menu -->
 
 
-
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('register.index')}}">
+                        <i class="ri-list-check"></i> <span data-key="t-dashboards">Registers</span>
+                    </a>
+                </li> <!-- end Dashboard Menu -->
 
 
 

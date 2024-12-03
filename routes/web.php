@@ -5,7 +5,9 @@ use App\Http\Controllers\backend\auth\AuthController;
 use App\Http\Controllers\backend\form\FormController;
 use App\Http\Controllers\backend\student\StudentController;
 use App\Http\Controllers\backend\user\UserController;
+use App\Http\Controllers\frontend\contact\ContactController;
 use App\Http\Controllers\frontend\page\PageController;
+use App\Http\Controllers\frontend\register\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,16 +27,16 @@ Route::get('/aim',[PageController::class,'aim'])->name('frontend.aim');
 Route::get('/project-site',[PageController::class,'projectSite'])->name('frontend.projectSite');
 Route::get('/schedule',[PageController::class,'schedule'])->name('frontend.schedule');
 Route::get('/brief',[PageController::class,'brief'])->name('frontend.brief');
-Route::get('/earth-view',[PageController::class,'earthView'])->name('frontend.earthView');
-Route::get('/drone-videos',[PageController::class,'droneVideos'])->name('frontend.droneVideos');
-Route::get('/autocad-files',[PageController::class,'autocadFiles'])->name('frontend.autocadFiles');
 Route::get('/q&a',[PageController::class,'qA'])->name('frontend.qA');
+Route::get('/document',[PageController::class,'document'])->name('frontend.document');
 Route::get('/jury',[PageController::class,'jury'])->name('frontend.jury');
 Route::get('/prizes',[PageController::class,'prizes'])->name('frontend.prizes');
 Route::get('/register',[PageController::class,'register'])->name('frontend.register');
+Route::post('/register',[RegisterController::class,'store'])->name('register.store');
 Route::get('/upload-project',[PageController::class,'uploadProject'])->name('frontend.uploadProject');
 Route::get('/contact',[PageController::class,'contact'])->name('frontend.contact');
 
+Route::post('/contact-send',[ContactController::class,'send'])->name('contact.send');
 
 
 Route::get('/login',[AuthController::class,'login'])->name('auth.login');
@@ -65,6 +67,8 @@ Route::middleware('auth')->group(function (){
         Route::post('/user/information-update',[UserController::class,'information_update'])->name('users.information.update')->middleware('adminStatus');
         Route::post('/user/password-update',[UserController::class,'password_update'])->name('users.password.update')->middleware('adminStatus');
 
+        Route::get('register/',[\App\Http\Controllers\backend\registe\RegisterController::class,'index'])->name('register.index');
+        Route::get('register/data',[\App\Http\Controllers\backend\registe\RegisterController::class,'getData'])->name('register.data');
 
 
 
