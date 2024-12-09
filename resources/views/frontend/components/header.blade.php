@@ -8,7 +8,7 @@
                 <!-- logo begin -->
                 <div id="logo" class="pull-left">
                     <a href="{{route('frontend.index')}}">
-                        <img src="{{asset('frontend/images/logo.png')}}" alt="" class="logo">
+                        <img src="{{asset('frontend/my-image/mimarlikSiyah.png')}}" alt="" class="logo" style="margin-top: 8px">
                     </a>
                 </div>
                 <!-- logo close -->

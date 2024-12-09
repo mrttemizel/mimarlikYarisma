@@ -13,6 +13,7 @@
         .btn-slider:hover{
             background: #834B26!important;
         }
+
     </style>
 
     @endsection
@@ -32,7 +33,7 @@
                 <ul>
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="2500" data-delay="5000">
                         <!--  BACKGROUND IMAGE -->
-                        <img src="{{asset('frontend/img-rev-slider/bgg.png')}}" alt="">
+                        <img src="{{asset('frontend/img-rev-slider/bg-new.png')}}" alt="">
 
 
                         <div class="tp-caption sfb custom-font-2"
@@ -90,14 +91,13 @@
                 }, 1000);
             </script>
         </div>
-
-
-        <!-- revolution slider close -->
     </div>
 
     <!-- slider close -->
 
     <div class="clearfix"></div>
+
+
 
 
 

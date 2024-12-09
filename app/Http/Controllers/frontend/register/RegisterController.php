@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Models\Team;
 use Illuminate\Http\Request;
-use TimeHunter\LaravelGoogleReCaptchaV2\Validations\GoogleReCaptchaV2ValidationRule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TeamLeaderNotification;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-
-
-        public function store(Request $request)
+    public function store(Request $request)
     {
+        // Form doğrulama
         $request->validate([
             'members' => 'required|array|min:1',
             'members.*.name' => 'required|string|max:255',
@@ -30,10 +30,19 @@ class RegisterController extends Controller
             ]
         );
 
-        // Benzersiz team_name oluştur
-        $lastTeam = Team::latest('id')->first(); // En son takımı bul
-        $nextTeamNumber = $lastTeam ? intval(substr($lastTeam->team_name, 5)) + 1 : 1;
-        $teamName = 'team-' . str_pad($nextTeamNumber, 3, '0', STR_PAD_LEFT);
+        // Team leader bilgilerini al
+        $teamLeaderEmail = $request->members[0]['email'];
+        $teamLeaderName = $request->members[0]['name'];
+
+        // Team leader e-posta kontrolü (daha önce kayıtlı mı?)
+        $existingTeamLeader = Member::where('email', $teamLeaderEmail)->first();
+
+        if ($existingTeamLeader) {
+            return redirect()->back()->with('error', 'The email address for the Team Leader is already registered.');
+        }
+
+        // 5 karakterlik benzersiz team_name oluştur
+        $teamName = $this->generateUniqueTeamName();
 
         // Takımı kaydet
         $team = Team::create([
@@ -41,7 +50,7 @@ class RegisterController extends Controller
         ]);
 
         // Üyeleri kaydet
-        foreach ($request->members as $member) {
+        foreach ($request->members as $index => $member) {
             $filePath = null;
 
             if (isset($member['file'])) {
@@ -61,9 +70,24 @@ class RegisterController extends Controller
             ]);
         }
 
+        // E-posta gönderimi
+        Mail::to($teamLeaderEmail)->send(new TeamLeaderNotification($teamLeaderName, $teamName));
+
         return redirect()->back()->with('success', 'Your registration is completed');
     }
 
+    /**
+     * 5 karakterlik benzersiz bir team_name oluşturur.
+     */
+    private function generateUniqueTeamName()
+    {
+        do {
+            // 5 karakterlik rastgele bir dizgi oluştur
+            $teamName = strtoupper(Str::random(5));
+            // Bu team_name veritabanında var mı kontrol et
+            $exists = Team::where('team_name', $teamName)->exists();
+        } while ($exists);
 
-
+        return $teamName;
+    }
 }
